@@ -1,0 +1,68 @@
+:root {
+  --ioskey-label: rgba(0, 0, 0, 1);
+  --text-base-medium-font-family: "DM Sans", Helvetica;
+  --text-base-medium-font-weight: 500;
+  --text-base-medium-font-size: 16px;
+  --text-base-medium-letter-spacing: 0.48px;
+  --text-base-medium-line-height: 24px;
+  --text-base-medium-font-style: normal;
+  --text-xs-regular-font-family: "DM Sans", Helvetica;
+  --text-xs-regular-font-weight: 400;
+  --text-xs-regular-font-size: 12px;
+  --text-xs-regular-letter-spacing: 0.36px;
+  --text-xs-regular-line-height: 16px;
+  --text-xs-regular-font-style: normal;
+  --system-colors-miscellaneous-floating-tab-text-unselected: rgba(0, 0, 0, 1);
+  --space-rounded-space-space-6: var(--base-size-size-24);
+  --space-rounded-space-space-3: var(--base-size-size-12);
+  --space-rounded-space-space-5: var(--base-size-size-20);
+  --space-rounded-space-space-9: var(--base-size-size-36);
+  --space-rounded-space-space-4: var(--base-size-size-16);
+  --space-rounded-rounded-full: 9999px;
+  --base-size-size-24: 24px;
+  --base-size-size-12: 12px;
+  --base-size-size-20: 20px;
+  --base-size-size-36: 36px;
+  --base-size-size-16: 16px;
+  --base-colors-primary-main: rgba(162, 123, 92, 1);
+  --base-colors-neutral-white: rgba(255, 255, 255, 1);
+  --base-colors-yellow-main: rgba(255, 169, 11, 1);
+  --color-tokens-BG-primary-default: var(--base-colors-primary-main);
+  --color-tokens-icon-white: var(--base-colors-neutral-white);
+  --color-tokens-BG-neutral-white: var(--base-colors-neutral-white);
+  --color-tokens-BG-yellow-default: var(--base-colors-yellow-main);
+}
+
+/*
+  
+  To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+  
+  <body data-system-colors-mode="light">
+      <!-- the rest of your content -->
+  </body>
+  
+  You can apply the theme on any DOM node, not just the `body`
+  
+  */
+
+[data-system-colors-mode="light"] {
+  --system-colors-miscellaneous-floating-tab-text-unselected: rgba(0, 0, 0, 1);
+}
+
+[data-system-colors-mode="dark"] {
+  --system-colors-miscellaneous-floating-tab-text-unselected: rgba(
+    255,
+    255,
+    255,
+    0.4
+  );
+}
+
+[data-system-colors-mode="dark-elevated"] {
+  --system-colors-miscellaneous-floating-tab-text-unselected: rgba(
+    255,
+    255,
+    255,
+    0.4
+  );
+}

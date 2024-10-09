@@ -1,0 +1,73 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f6f4ef;
+}
+
+.step-info {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
+h5 {
+  font-size: 18px;
+  color: #a89f91;
+  text-transform: uppercase;
+}
+
+.items-needed {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.item-list .item {
+  background-color: #f9f8f6;
+  border: 1px solid #e0d9d3;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.item span {
+  font-size: 16px;
+  color: #4a4a4a;
+}
+
+.delete-btn {
+  color: #a89f91;
+  font-size: 18px;
+}
+
+.add-ingredient {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.add-ingredient .btn {
+  border-radius: 25px;
+  color: #a89f91;
+}
+
+.proceed-btn {
+  background-color: #8c7353;
+  color: white;
+  border-radius: 25px;
+  padding: 10px 30px;
+  font-size: 18px;
+}
+
+.proceed-btn:hover {
+  background-color: #7a6448;
+}

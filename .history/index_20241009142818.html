@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cheese on Toast</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <!-- Header with step information and icons -->
+      <div class="row my-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <h6 class="step-info">Step 1 - Items Needed</h6>
+          <i class="fas fa-bars icon"></i>
+          <!-- Assuming this is a hamburger menu -->
+        </div>
+      </div>
+
+      <!-- Main section -->
+      <div class="row">
+        <!-- Title for the dish -->
+        <div class="col-12 text-center">
+          <h1>Cheese on Toast</h1>
+        </div>
+      </div>
+
+      <!-- Content: Items, Stages and Button -->
+      <div class="row mt-4">
+        <!-- Items Needed Section -->
+        <div class="col-lg-6 items-needed">
+          <h5>Items Needed</h5>
+          <!-- Items List -->
+          <div class="item-list">
+            <div class="item d-flex justify-content-between align-items-center">
+              <span>Bread</span>
+              <span>1 slice brown or white</span>
+              <button class="btn btn-link delete-btn">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+            <div class="item d-flex justify-content-between align-items-center">
+              <span>Bland cheese</span>
+              <span>1 slice extra mild</span>
+              <button class="btn btn-link delete-btn">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+            <div class="item d-flex justify-content-between align-items-center">
+              <span>Butter</span>
+              <span>Unsalted</span>
+              <button class="btn btn-link delete-btn">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Add Ingredient Option -->
+          <div class="add-ingredient">
+            <button class="btn btn-outline-secondary">Add Ingredient</button>
+          </div>
+        </div>
+
+        <!-- Cooking & Serving Stage -->
+        <div class="col-lg-3">
+          <h5>Cooking</h5>
+          <p>Second Stage</p>
+        </div>
+
+        <div class="col-lg-3">
+          <h5>Serving</h5>
+          <p>Third Stage</p>
+        </div>
+      </div>
+
+      <!-- Proceed to Cooking Button -->
+      <div class="row mt-4">
+        <div class="col-12 d-flex justify-content-end">
+          <button class="btn btn-lg proceed-btn">Proceed to Cooking</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and custom script -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- For icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

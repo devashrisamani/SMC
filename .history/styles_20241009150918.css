@@ -1,0 +1,135 @@
+/* Custom styles for the header */
+.logo {
+  width: 42px;
+  height: 36px;
+}
+
+.bi-question-circle-fill {
+  color: #a27b5c;
+}
+
+.border-bottom {
+  border-color: #eee;
+}
+
+/* Title Section */
+.header-title {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  color: #666666;
+  font-size: 36px;
+  margin: 0;
+}
+
+.retry-btn {
+  border-color: #a27b5c;
+  color: #a27b5c;
+  border-radius: 20px;
+}
+
+.retry-btn:hover {
+  background-color: #a27b5c;
+  color: #fff;
+}
+
+/* Ensure the container takes up the full height of the viewport */
+.container-fluid {
+  height: 100vh; /* Full height of the viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex-grow: 1; /* Make the row fill the remaining vertical space */
+}
+
+/* Rectangles should take up 100% of their parent height */
+.rectangle {
+  background-color: #f7f3ef;
+  padding: 20px;
+  height: 100%; /* Full height of the container */
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* First Rectangle (Items Needed) */
+.items-needed {
+  background-color: #f9f4ef;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Second Rectangle (Cooking) */
+.cooking {
+  background-color: #f2eee9;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Third Rectangle (Serving) */
+.serving {
+  background-color: #eae2db;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Title and Text Styles */
+.items-title {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  color: #a27b5c;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.ingredients-list .list-group-item {
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.ingredients-list .list-group-item strong {
+  font-size: 18px;
+  color: #666666;
+}
+
+.ingredients-list .list-group-item p {
+  font-size: 14px;
+  color: #999999;
+}
+
+/* Add Ingredient Button */
+.add-ingredient {
+  color: #a27b5c;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Cooking and Serving Section Titles */
+.cooking h5,
+.serving h5 {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  font-size: 18px;
+  color: #a27b5c;
+  margin-bottom: 5px;
+}
+
+/* Cooking and Serving Section Text */
+.cooking p,
+.serving p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  color: #999999;
+}
+
+/* Ensure the overall page has no padding or margins */
+body,
+html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}

@@ -1,0 +1,13 @@
+/* Custom styles for the header */
+.logo {
+  width: 42px;
+  height: 36px;
+}
+
+.bi-question-circle-fill {
+  color: #a27b5c;
+}
+
+.border-bottom {
+  border-color: #eee;
+}

@@ -1,0 +1,85 @@
+/* Custom styles for the header */
+.logo {
+  width: 42px;
+  height: 36px;
+}
+
+.bi-question-circle-fill {
+  color: #a27b5c;
+}
+
+.border-bottom {
+  border-color: #eee;
+}
+
+/* Title Section */
+.header-title {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  color: #666666;
+  font-size: 36px;
+  margin: 0;
+}
+
+.retry-btn {
+  border-color: #a27b5c;
+  color: #a27b5c;
+  border-radius: 20px;
+}
+
+.retry-btn:hover {
+  background-color: #a27b5c;
+  color: #fff;
+}
+
+/* Main Content Styling */
+.items-title {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  color: #a27b5c;
+  font-size: 18px;
+}
+
+.ingredients-list .list-group-item {
+  border: none;
+  border-radius: 10px;
+  background-color: #f7f3ef;
+  margin-bottom: 10px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.ingredients-list .list-group-item strong {
+  font-size: 18px;
+  color: #666666;
+}
+
+.ingredients-list .list-group-item p {
+  font-size: 14px;
+  color: #999999;
+}
+
+.add-ingredient {
+  color: #a27b5c;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.stage-section h5 {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  font-size: 18px;
+  color: #a27b5c;
+  margin-bottom: 5px;
+}
+
+.stage-section p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  color: #999999;
+}
+
+.proceed-btn {
+  background-color: #a27b5c;
+  color: white;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+}

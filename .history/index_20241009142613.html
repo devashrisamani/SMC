@@ -1,0 +1,458 @@
+<style>
+  .recipe-container {
+    max-width: none !important;
+    background-color: #a27b5c;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .recipe-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 834px;
+    width: 100%;
+  }
+
+  .background-image {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .content-wrapper {
+    position: relative;
+    background-color: #fff;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .status-bar {
+    align-self: stretch;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 16px 20px 16px 36px;
+  }
+
+  .time-display {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #000;
+    font: 500 14px SF Pro Display, sans-serif;
+  }
+
+  .clock {
+    display: flex;
+    align-items: center;
+  }
+
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .status-icon {
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .header-icons {
+    display: flex;
+    margin-top: 31px;
+    width: 100%;
+    max-width: 1114px;
+    align-items: start;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .divider {
+    margin-top: 38px;
+    width: 100%;
+    max-width: 1114px;
+    height: 2px;
+    border: 2px solid #a27b5c;
+  }
+
+  .recipe-header {
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 1111px;
+    gap: 20px;
+    font-family: Calistoga, sans-serif;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .recipe-title {
+    color: #666;
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .retry-button {
+    display: flex;
+    min-height: 40px;
+    align-items: center;
+    font-size: 18px;
+    color: #a27b5c;
+    text-align: center;
+    letter-spacing: 0.54px;
+    line-height: 1;
+    border-radius: 9999px;
+    padding: 8px 20px;
+    border: 2px solid #a27b5c;
+  }
+
+  .recipe-content {
+    align-self: stretch;
+    margin: 30px 40px 0 0;
+  }
+
+  .recipe-columns {
+    display: flex;
+    gap: 20px;
+  }
+
+  .ingredients-column {
+    width: 66%;
+  }
+
+  .ingredients-section {
+    background-color: #a27b5c;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 0 169px;
+  }
+
+  .ingredients-header {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 0 40px 29px;
+  }
+
+  .ingredients-title-wrapper {
+    display: flex;
+    gap: 20px;
+    font-size: 18px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .ingredients-title {
+    color: #c98667;
+    font-family: Aboreto, sans-serif;
+    line-height: 26px;
+    letter-spacing: 3.06px;
+    text-transform: uppercase;
+  }
+
+  .add-ingredient {
+    color: #a27b5c;
+    font-family: Calistoga, sans-serif;
+    line-height: 1;
+    letter-spacing: 0.54px;
+    align-self: start;
+  }
+
+  .ingredient-item {
+    border-radius: 14px;
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    gap: 20px;
+    font-family: Epilogue, sans-serif;
+    color: #666;
+    padding: 20px;
+    border: 2px solid rgba(162, 123, 92, 0.4);
+  }
+
+  .ingredient-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ingredient-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .ingredient-description {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .remove-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 24px;
+    align-self: flex-end;
+    margin: -53px 30px 0 0;
+  }
+
+  .cooking-column {
+    width: 34%;
+  }
+
+  .cooking-section {
+    display: flex;
+    width: 100%;
+    padding-bottom: 50px;
+    flex-direction: column;
+    font-weight: 400;
+  }
+
+  .cooking-stages {
+    display: flex;
+  }
+
+  .cooking-stage {
+    background-color: #a27b5c;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 40px 40px 462px;
+  }
+
+  .stage-title {
+    color: #c98667;
+    letter-spacing: 3.06px;
+    text-transform: uppercase;
+    font: 18px Aboreto, sans-serif;
+  }
+
+  .stage-description {
+    color: #a27b5c;
+    align-self: start;
+    margin-top: 40px;
+    font: 14px Epilogue, sans-serif;
+  }
+
+  .proceed-button {
+    display: flex;
+    min-height: 70px;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    letter-spacing: 0.72px;
+    font: 24px/1 Calistoga, sans-serif;
+    border-radius: 9999px;
+    background-color: #a27b5c;
+    width: 100%;
+    padding: 23px 20px;
+  }
+
+  @media (max-width: 991px) {
+    .recipe-wrapper,
+    .content-wrapper,
+    .status-bar,
+    .header-icons,
+    .recipe-header,
+    .recipe-content,
+    .ingredients-section,
+    .ingredients-header,
+    .ingredients-title-wrapper {
+      max-width: 100%;
+    }
+
+    .status-bar {
+      padding-left: 20px;
+    }
+
+    .time-display,
+    .clock {
+      white-space: initial;
+    }
+
+    .recipe-content {
+      margin-right: 10px;
+    }
+
+    .recipe-columns {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .ingredients-column,
+    .cooking-column {
+      width: 100%;
+    }
+
+    .ingredients-section {
+      padding-bottom: 100px;
+    }
+
+    .ingredients-header {
+      padding: 0 20px;
+    }
+
+    .ingredient-item {
+      padding-right: 20px;
+    }
+
+    .remove-icon {
+      margin-right: 10px;
+    }
+
+    .cooking-stage {
+      padding: 0 20px 100px;
+    }
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<section class="recipe-container">
+  <div class="recipe-wrapper">
+    <img
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/bfa3e80254a26c2a8938ff7d68f69f000a487b46d1a73425a24e64bc06466dd4?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+      alt=""
+      class="background-image"
+    />
+    <div class="content-wrapper">
+      <header class="status-bar">
+        <div class="time-display">
+          <div class="clock">
+            <span>9</span>
+            <span>:</span>
+            <span>41</span>
+          </div>
+        </div>
+        <div class="status-icons">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1a3140be7b07777fa5cd2b9086a4938f42b5737a07ffea224fda88b0594a4cc7?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+            alt="Signal strength"
+            class="status-icon"
+            width="18"
+            height="10"
+          />
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/c91a268e26c6b86e6607a89b72efb5132038d24cbecfc846d6806f3f237c79e1?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+            alt="Wi-Fi signal"
+            class="status-icon"
+            width="16"
+            height="11"
+          />
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/c09a0faa297f2fcc2c84bd779ca8a170203545409ce910735ae31fe5a0391af1?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+            alt="Battery status"
+            class="status-icon"
+            width="24"
+            height="12"
+          />
+        </div>
+      </header>
+      <div class="header-icons">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb1f124c3799556edb707951ca0d8957aad81d9ed136e853ab50ede0f87b26b7?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+          alt="Menu icon"
+          width="42"
+          height="36"
+        />
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/d3f24fffb65431ab05b28b46f9353f3bed9aba2544a31a58bd39102dd4b6abba?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+          alt="User profile icon"
+          width="35"
+          height="35"
+        />
+      </div>
+      <hr class="divider" />
+      <div class="recipe-header">
+        <h1 class="recipe-title">Cheese on Toast</h1>
+        <button class="retry-button">Retry Analyse</button>
+      </div>
+      <main class="recipe-content">
+        <div class="recipe-columns">
+          <section class="ingredients-column">
+            <div class="ingredients-section">
+              <div class="ingredients-header">
+                <div class="ingredients-title-wrapper">
+                  <h2 class="ingredients-title">Items Needed</h2>
+                  <button class="add-ingredient">Add Ingredient</button>
+                </div>
+              </div>
+              <ul>
+                <li class="ingredient-item">
+                  <div class="ingredient-info">
+                    <h3 class="ingredient-name">Bread</h3>
+                    <p class="ingredient-description">1 slice brown or white</p>
+                  </div>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/fc56db5670a5034dcfdd976de30ae9208bec1b38f1901cec739a21d66d59ada7?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+                    alt="Remove bread"
+                    class="remove-icon"
+                  />
+                </li>
+                <li class="ingredient-item">
+                  <div class="ingredient-info">
+                    <h3 class="ingredient-name">Bland cheese</h3>
+                    <p class="ingredient-description">1 slice extra mild</p>
+                  </div>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/d216562983a90a29be0c48dfc88ef0f70fd0f4c348570605dd0a73df50770f98?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+                    alt="Remove cheese"
+                    class="remove-icon"
+                  />
+                </li>
+                <li class="ingredient-item">
+                  <div class="ingredient-info">
+                    <h3 class="ingredient-name">Butter</h3>
+                    <p class="ingredient-description">Unsalted</p>
+                  </div>
+                  <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/d216562983a90a29be0c48dfc88ef0f70fd0f4c348570605dd0a73df50770f98?placeholderIfAbsent=true&apiKey=b1bc613eb6e84fc4a81656b9d7dfd2e4"
+                    alt="Remove butter"
+                    class="remove-icon"
+                  />
+                </li>
+              </ul>
+            </div>
+          </section>
+          <section class="cooking-column">
+            <div class="cooking-section">
+              <div class="cooking-stages">
+                <div class="cooking-stage">
+                  <h2 class="stage-title">Cooking</h2>
+                  <p class="stage-description">Second Stage</p>
+                </div>
+                <div class="cooking-stage">
+                  <h2 class="stage-title">Serving</h2>
+                  <p class="stage-description">Third Stage</p>
+                </div>
+              </div>
+              <button class="proceed-button">Proceed to Cooking</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>

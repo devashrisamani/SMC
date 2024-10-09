@@ -1,0 +1,135 @@
+/* Custom styles for the header */
+.logo {
+  width: 42px;
+  height: 36px;
+}
+
+.bi-question-circle-fill {
+  color: #a27b5c;
+}
+
+.border-bottom {
+  border-color: #eee;
+}
+
+/* Title Section */
+.header-title {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  color: #666666;
+  font-size: 36px;
+  margin: 0;
+}
+
+.retry-btn {
+  border-color: #a27b5c;
+  color: #a27b5c;
+  border-radius: 20px;
+}
+
+.retry-btn:hover {
+  background-color: #a27b5c;
+  color: #fff;
+}
+
+/* Styling for the three rectangles */
+
+.rectangle {
+  background-color: #f7f3ef;
+  padding: 20px;
+  /* height: 100%; */
+  margin-bottom: 10px;
+  min-height: 70vh;
+}
+
+.items-needed {
+  background-color: #f9f4ef;
+}
+
+.cooking {
+  background-color: #f2eee9;
+  text-align: center;
+}
+
+.serving {
+  background-color: #eae2db;
+  text-align: center;
+}
+
+/* Title and Text Styles */
+.items-title {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  color: #a27b5c;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.ingredients-list .list-group-item {
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.ingredients-list .list-group-item strong {
+  font-size: 18px;
+  color: #666666;
+}
+
+.ingredients-list .list-group-item p {
+  font-size: 14px;
+  color: #999999;
+}
+
+/* Add Ingredient Button */
+.add-ingredient {
+  color: #a27b5c;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.cooking h5,
+.serving h5 {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  font-size: 18px;
+  color: #a27b5c;
+}
+
+.cooking p,
+.serving p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  color: #999999;
+}
+
+/* Flexbox for the title and button alignment */
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Styling for the Proceed button */
+.proceed-btn-wrapper {
+  position: absolute;
+  bottom: 30px; /* Adjust the distance from the bottom of the rectangles */
+  left: 50%; /* Center the button horizontally */
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.proceed-btn {
+  background-color: #a27b5c;
+  color: #fff;
+  border-radius: 50px;
+  font-size: 16px;
+  padding: 10px 40px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.proceed-btn:hover {
+  background-color: #8c6649;
+  color: #fff;
+}

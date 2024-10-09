@@ -1,0 +1,29 @@
+/* Custom styles for the header */
+.logo {
+  width: 42px;
+  height: 36px;
+}
+
+.header-title {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  color: #666666;
+  font-size: 36px;
+}
+
+.bi-question-circle-fill {
+  color: #a27b5c;
+}
+
+.btn-outline-primary {
+  border-color: #a27b5c;
+  color: #a27b5c;
+}
+
+.btn-outline-primary:hover {
+  background-color: #a27b5c;
+  color: #fff;
+}
+
+.border-bottom {
+  border-color: #eee;
+}

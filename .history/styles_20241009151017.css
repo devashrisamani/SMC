@@ -1,0 +1,32 @@
+/* Custom styles for the header */
+.logo {
+  width: 42px;
+  height: 36px;
+}
+
+.bi-question-circle-fill {
+  color: #a27b5c;
+}
+
+.border-bottom {
+  border-color: #eee;
+}
+
+/* Title Section */
+.header-title {
+  font-family: "Calistoga-Regular", Helvetica, sans-serif;
+  color: #666666;
+  font-size: 36px;
+  margin: 0;
+}
+
+.retry-btn {
+  border-color: #a27b5c;
+  color: #a27b5c;
+  border-radius: 20px;
+}
+
+.retry-btn:hover {
+  background-color: #a27b5c;
+  color: #fff;
+}
