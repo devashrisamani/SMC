@@ -96,6 +96,7 @@
         align-items: center;
         font-family: "DM Sans", sans-serif;
         color: #6ca85c; /* Green text color */
+        margin-top: 20px;
       }
 
       .link-saved-container i {
@@ -109,10 +110,6 @@
         color: #e74c3c; /* Red color for delete icon */
         margin-left: 20px;
         cursor: pointer;
-      }
-
-      .hidden {
-        display: none;
       }
     </style>
   </head>
@@ -157,26 +154,27 @@
 
       <!-- Save and Analyze Buttons positioned at the bottom of the page -->
       <div class="bottom-buttons mt-4">
-        <!-- Replaced Save Button with Link Saved Confirmation -->
-        <div id="saveBtnContainer" class="d-flex align-items-center">
-          <button
-            id="saveBtn"
-            class="btn btn-outline-secondary disabled"
-            disabled
-          >
-            Save for later
-          </button>
-        </div>
+        <button
+          id="saveBtn"
+          class="btn btn-outline-secondary disabled"
+          disabled
+        >
+          Save for later
+        </button>
         <button id="analyseBtn" class="btn btn-primary disabled" disabled>
           Analyse
         </button>
       </div>
 
       <!-- "Link Saved" confirmation message -->
-      <div id="linkSavedMessage" class="link-saved-container hidden">
+      <div
+        id="linkSavedMessage"
+        class="link-saved-container"
+        style="display: none"
+      >
         <i class="fas fa-check-circle"></i>
         <span>Link Saved</span>
-        <i id="deleteIcon" class="fas fa-trash delete-icon"></i>
+        <i class="fas fa-trash delete-icon"></i>
       </div>
     </section>
 
@@ -190,8 +188,6 @@
       const saveBtn = document.getElementById("saveBtn");
       const analyseBtn = document.getElementById("analyseBtn");
       const linkSavedMessage = document.getElementById("linkSavedMessage");
-      const saveBtnContainer = document.getElementById("saveBtnContainer");
-      const deleteIcon = document.getElementById("deleteIcon");
 
       // Function to enable buttons when a valid link is in the input
       function enableButtons() {
@@ -224,20 +220,11 @@
         enableButtons();
       });
 
-      // Show "Link Saved" message and hide "Save for later" button when clicked
+      // Show "Link Saved" message when "Save for later" button is clicked
       saveBtn.addEventListener("click", function () {
         if (!saveBtn.disabled) {
-          saveBtnContainer.classList.add("hidden"); // Hide "Save for later" button
-          linkSavedMessage.classList.remove("hidden"); // Show "Link Saved" message
+          linkSavedMessage.style.display = "flex"; // Show the link saved message
         }
-      });
-
-      // Delete the saved link and show "Save for later" button again
-      deleteIcon.addEventListener("click", function () {
-        linkSavedMessage.classList.add("hidden"); // Hide "Link Saved" message
-        saveBtnContainer.classList.remove("hidden"); // Show "Save for later" button
-        recipeInput.value = ""; // Clear the input field
-        enableButtons(); // Disable the buttons again
       });
 
       // Also enable/disable buttons if the input field changes manually
