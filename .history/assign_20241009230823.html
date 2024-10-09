@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Assign Page</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="container-fluid border-bottom py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Logo -->
+        <div>
+          <img src="img/logomark.svg" alt="Logo" class="logo" />
+        </div>
+
+        <!-- Help Icon -->
+        <div>
+          <i class="bi bi-question-circle-fill fs-4 text-muted"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Title and Retry Button -->
+    <section class="container-fluid py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Title -->
+        <h1 class="header-title">Cheese on Toast</h1>
+      </div>
+    </section>
+    <!-- Main Content -->
+    <section class="container-fluid py-3">
+      <div class="row position-relative">
+        <!-- First Rectangle: Items Needed -->
+        <div class="col-md-8 rectangle items-needed">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <!-- Title (Items Needed) -->
+            <h4 class="items-title">ITEMS NEEDED</h4>
+
+            <!-- Add Ingredient and Refresh Button -->
+            <div>
+              <button class="btn btn-link add-ingredient">Assign Random</button>
+              <button class="btn btn-link add-ingredient">Add Step</button>
+              <button class="btn btn-link refresh-btn">
+                <i class="bi bi-arrow-clockwise"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Ingredients List -->
+          <ul class="list-group ingredients-list">
+            <!-- Ingredients will be added here -->
+          </ul>
+        </div>
+
+        <!-- Second Rectangle: Cooking -->
+        <!-- <div class="col-md-3 rectangle cooking">
+          <h5>COOKING</h5>
+          <p>Second Stage</p>
+        </div> -->
+
+        <!-- Third Rectangle: Serving -->
+        <div class="col-md-3 rectangle serving">
+          <h5>SERVING</h5>
+          <p>Third Stage</p>
+        </div>
+
+        <!-- Button inside both Cooking and Serving -->
+        <div class="proceed-btn-wrapper position-absolute">
+          <button class="btn btn-primary proceed-btn">
+            Proceed to Serving
+          </button>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
