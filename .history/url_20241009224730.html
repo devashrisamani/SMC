@@ -90,18 +90,12 @@
         align-items: center;
       }
 
-      .button-group {
-        display: flex;
-        align-items: center;
-      }
-
       /* Styles for the "Link Saved" message */
       .link-saved-container {
         display: flex;
         align-items: center;
         font-family: "DM Sans", sans-serif;
         color: #6ca85c; /* Green text color */
-        margin-left: 10px;
       }
 
       .link-saved-container i {
@@ -163,30 +157,26 @@
 
       <!-- Save and Analyze Buttons positioned at the bottom of the page -->
       <div class="bottom-buttons mt-4">
-        <!-- Group the Save Button and Link Saved message in the same container -->
-        <div class="button-group">
-          <div id="saveBtnContainer">
-            <button
-              id="saveBtn"
-              class="btn btn-outline-secondary disabled"
-              disabled
-            >
-              Save for later
-            </button>
-          </div>
-
-          <!-- "Link Saved" confirmation message -->
-          <div id="linkSavedMessage" class="link-saved-container hidden">
-            <i class="fas fa-check-circle"></i>
-            <span>Link Saved</span>
-            <i id="deleteIcon" class="fas fa-trash delete-icon"></i>
-          </div>
+        <!-- Replaced Save Button with Link Saved Confirmation -->
+        <div id="saveBtnContainer">
+          <button
+            id="saveBtn"
+            class="btn btn-outline-secondary disabled"
+            disabled
+          >
+            Save for later
+          </button>
         </div>
-
-        <!-- Analyse Button remains in its original position -->
         <button id="analyseBtn" class="btn btn-primary disabled" disabled>
           Analyse
         </button>
+      </div>
+
+      <!-- "Link Saved" confirmation message -->
+      <div id="linkSavedMessage" class="link-saved-container hidden">
+        <i class="fas fa-check-circle"></i>
+        <span>Link Saved</span>
+        <i id="deleteIcon" class="fas fa-trash delete-icon"></i>
       </div>
     </section>
 
@@ -237,7 +227,7 @@
       // Show "Link Saved" message and hide "Save for later" button when clicked
       saveBtn.addEventListener("click", function () {
         if (!saveBtn.disabled) {
-          saveBtnContainer.classList.add("hidden"); // Hide "Save for later" button
+          saveBtn.classList.add("hidden"); // Hide "Save for later" button
           linkSavedMessage.classList.remove("hidden"); // Show "Link Saved" message
         }
       });
@@ -245,7 +235,7 @@
       // Delete the saved link and show "Save for later" button again
       deleteIcon.addEventListener("click", function () {
         linkSavedMessage.classList.add("hidden"); // Hide "Link Saved" message
-        saveBtnContainer.classList.remove("hidden"); // Show "Save for later" button
+        saveBtn.classList.remove("hidden"); // Show "Save for later" button
         recipeInput.value = ""; // Clear the input field
         enableButtons(); // Disable the buttons again
       });
