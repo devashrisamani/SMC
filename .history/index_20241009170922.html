@@ -21,10 +21,20 @@
         border: 1px solid #ccc;
         padding: 10px;
         z-index: 1000;
+        width: 300px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       }
 
       .ingredient-list {
         position: relative;
+      }
+
+      .items-needed {
+        position: relative;
+      }
+
+      .popup-open {
+        display: block;
       }
     </style>
   </head>
@@ -104,8 +114,19 @@
 
     <!-- Add Ingredient Popup -->
     <div class="add-ingredient-popup">
-      <input type="text" id="new-ingredient" placeholder="Ingredient" />
-      <input type="text" id="new-description" placeholder="Description" />
+      <h5>Add Ingredient</h5>
+      <input
+        type="text"
+        id="new-ingredient"
+        placeholder="Ingredient"
+        class="form-control mb-2"
+      />
+      <input
+        type="text"
+        id="new-description"
+        placeholder="Description"
+        class="form-control mb-2"
+      />
       <button class="btn btn-primary" id="submit-ingredient">Add</button>
     </div>
 
@@ -200,11 +221,12 @@
         }
       });
 
-      // Show the add ingredient popup
+      // Show the add ingredient popup within the rectangle
       addIngredientButton.addEventListener("click", (e) => {
-        popup.style.display = "block";
-        popup.style.top = `${e.clientY + window.scrollY}px`;
-        popup.style.left = `${e.clientX}px`;
+        const buttonRect = addIngredientButton.getBoundingClientRect();
+        popup.style.top = `${buttonRect.bottom + window.scrollY}px`;
+        popup.style.left = `${buttonRect.left + window.scrollX}px`;
+        popup.classList.add("popup-open");
       });
 
       // Refresh button to reset hardcoded ingredients
@@ -220,8 +242,13 @@
           !popup.contains(e.target) &&
           !addIngredientButton.contains(e.target)
         ) {
-          popup.style.display = "none";
+          popup.classList.remove("popup-open");
         }
+      });
+
+      // Prevent popup from closing when clicking inside the popup
+      popup.addEventListener("click", (e) => {
+        e.stopPropagation();
       });
 
       // Initialize with hardcoded ingredients
