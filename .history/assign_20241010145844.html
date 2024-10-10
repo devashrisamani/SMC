@@ -24,8 +24,7 @@
 
       /* Style for Assign Random and Add Step buttons */
       .assign-random,
-      .add-step,
-      .refresh-btn {
+      .add-step {
         color: #a67b5c;
         padding: 10px 20px;
         font-size: 14px;
@@ -35,9 +34,14 @@
       }
 
       .assign-random:hover,
-      .add-step:hover,
-      .refresh-btn:hover {
+      .add-step:hover {
         color: #8c6649;
+      }
+
+      .assign-random:focus,
+      .add-step:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(166, 123, 92, 0.5);
       }
 
       .list-group {
@@ -224,7 +228,7 @@
             <div>
               <button class="btn assign-random">Assign Random</button>
               <button class="btn add-step">Add Step</button>
-              <button class="btn refresh-btn">
+              <button class="btn btn-link refresh-btn">
                 <i class="bi bi-arrow-clockwise"></i>
               </button>
             </div>

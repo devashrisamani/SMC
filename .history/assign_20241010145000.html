@@ -22,24 +22,6 @@
         padding: 20px;
       }
 
-      /* Style for Assign Random and Add Step buttons */
-      .assign-random,
-      .add-step,
-      .refresh-btn {
-        color: #a67b5c;
-        padding: 10px 20px;
-        font-size: 14px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .assign-random:hover,
-      .add-step:hover,
-      .refresh-btn:hover {
-        color: #8c6649;
-      }
-
       .list-group {
         margin: 0;
         padding: 0;
@@ -222,9 +204,9 @@
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="items-title">COOKING</h4>
             <div>
-              <button class="btn assign-random">Assign Random</button>
-              <button class="btn add-step">Add Step</button>
-              <button class="btn refresh-btn">
+              <button class="btn btn-link assign-random">Assign Random</button>
+              <button class="btn btn-link add-step">Add Step</button>
+              <button class="btn btn-link refresh-btn">
                 <i class="bi bi-arrow-clockwise"></i>
               </button>
             </div>
@@ -261,7 +243,7 @@
                 </div>
                 <div class="assigned-users mt-2">
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-1" />
+                    <input type="radio" name="assigned-user-1" checked />
                     <span>Jennifer Lopez</span>
                   </label>
                   <label class="user-option">
@@ -304,7 +286,7 @@
                 </div>
                 <div class="assigned-users mt-2">
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-2" />
+                    <input type="radio" name="assigned-user-2" checked />
                     <span>Jennifer Lopez</span>
                   </label>
                   <label class="user-option">
@@ -347,7 +329,7 @@
                 </div>
                 <div class="assigned-users mt-2">
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-3" />
+                    <input type="radio" name="assigned-user-3" checked />
                     <span>Jennifer Lopez</span>
                   </label>
                   <label class="user-option">
@@ -402,32 +384,6 @@
           item.querySelector(".step-number").textContent = `STEP ${index + 1}`;
         });
       }
-
-      // Assign each person to at least one task on page load
-      function assignInitialTasks() {
-        const people = ["Jennifer Lopez", "Jeff Bezos", "Elon Musk"];
-        let steps = document.querySelectorAll(".step-item");
-        let shuffledSteps = Array.from(steps).sort(() => 0.5 - Math.random());
-
-        people.forEach((person, index) => {
-          let step = shuffledSteps[index];
-          let radios = step.querySelectorAll('input[type="radio"]');
-          radios.forEach((radio) => {
-            if (radio.nextElementSibling.textContent === person) {
-              radio.checked = true;
-            }
-          });
-        });
-
-        shuffledSteps.slice(people.length).forEach((step) => {
-          let radios = step.querySelectorAll('input[type="radio"]');
-          let randomPersonIndex = Math.floor(Math.random() * radios.length);
-          radios[randomPersonIndex].checked = true;
-        });
-      }
-
-      // Call this function on page load to assign initial tasks
-      window.onload = assignInitialTasks;
 
       // Add Step functionality
       document
@@ -498,11 +454,16 @@
         });
       }
 
-      // Assign Random functionality ensuring each person gets at least one task
+      // Assign Random functionality
       document
         .querySelector(".assign-random")
         .addEventListener("click", function () {
-          assignInitialTasks();
+          const people = ["Jennifer Lopez", "Jeff Bezos", "Elon Musk"];
+          document.querySelectorAll(".step-item").forEach((stepItem) => {
+            const radios = stepItem.querySelectorAll('input[type="radio"]');
+            const randomIndex = Math.floor(Math.random() * radios.length);
+            radios[randomIndex].checked = true; // Randomly select one radio button
+          });
         });
 
       // Timer functionality (+/-)
@@ -539,7 +500,6 @@
           stepCounter = 4; // Reset counter
           addDeleteListeners();
           updateStepNumbers();
-          assignInitialTasks(); // Reassign random tasks after refresh
         });
     </script>
   </body>
