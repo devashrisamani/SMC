@@ -259,6 +259,20 @@
                   <i class="bi bi-person task-icon"></i>
                   <p class="assigned-text mb-0">Assigned to</p>
                 </div>
+                <!-- <div class="assigned-users mt-2">
+                  <label class="user-option">
+                    <input type="radio" name="assigned-user-1" />
+                    <span>Jennifer Lopez</span>
+                  </label>
+                  <label class="user-option">
+                    <input type="radio" name="assigned-user-1" />
+                    <span>Jeff Bezos</span>
+                  </label>
+                  <label class="user-option">
+                    <input type="radio" name="assigned-user-1" />
+                    <span>Elon Musk</span>
+                  </label>
+                </div> -->
                 <div class="assigned-users mt-2">
                   <label class="user-option">
                     <input type="radio" name="assigned-user-1" />
@@ -305,15 +319,15 @@
                 <div class="assigned-users mt-2">
                   <label class="user-option">
                     <input type="radio" name="assigned-user-2" />
-                    <span id="chef1-display">Chef 1</span>
+                    <span>Jennifer Lopez</span>
                   </label>
                   <label class="user-option">
                     <input type="radio" name="assigned-user-2" />
-                    <span id="chef2-display">Chef 2</span>
+                    <span>Jeff Bezos</span>
                   </label>
                   <label class="user-option">
                     <input type="radio" name="assigned-user-2" />
-                    <span id="chef3-display">Chef 3</span>
+                    <span>Elon Musk</span>
                   </label>
                 </div>
               </div>
@@ -348,15 +362,15 @@
                 <div class="assigned-users mt-2">
                   <label class="user-option">
                     <input type="radio" name="assigned-user-3" />
-                    <span id="chef1-display">Chef 1</span>
+                    <span>Jennifer Lopez</span>
                   </label>
                   <label class="user-option">
                     <input type="radio" name="assigned-user-3" />
-                    <span id="chef2-display">Chef 2</span>
+                    <span>Jeff Bezos</span>
                   </label>
                   <label class="user-option">
                     <input type="radio" name="assigned-user-3" />
-                    <span id="chef3-display">Chef 3</span>
+                    <span>Elon Musk</span>
                   </label>
                 </div>
               </div>
@@ -382,11 +396,6 @@
       let stepCounter = 4; // Step count starts at 4 since 3 steps are already hardcoded
       let originalOrderHTML = [];
 
-      // Retrieve chef names from localStorage
-      const chef1 = localStorage.getItem("chef1") || "Jennifer Lopez";
-      const chef2 = localStorage.getItem("chef2") || "Jeff Bezos";
-      const chef3 = localStorage.getItem("chef3") || "Elon Musk";
-
       // Store the original steps for the refresh button
       document.querySelectorAll(".step-item").forEach((item) => {
         originalOrderHTML.push(item.outerHTML);
@@ -408,71 +417,31 @@
         });
       }
 
-      // Dynamically update the chef names in the tasks
-      function updateChefNamesInSteps() {
-        document.querySelectorAll(".step-item").forEach((item) => {
-          let chefLabels = item.querySelectorAll(".assigned-users span");
-          chefLabels[0].textContent = chef1;
-          chefLabels[1].textContent = chef2;
-          chefLabels[2].textContent = chef3;
-        });
-      }
+      // Assign each person to at least one task on page load
+      function assignInitialTasks() {
+        const people = ["Jennifer Lopez", "Jeff Bezos", "Elon Musk"];
+        let steps = document.querySelectorAll(".step-item");
+        let shuffledSteps = Array.from(steps).sort(() => 0.5 - Math.random());
 
-      // Ensure each chef gets at least one task and distribute the rest randomly
-      function assignTasksWithAtLeastOnePerChef() {
-        const chefs = [chef1, chef2, chef3];
-        const steps = document.querySelectorAll(".step-item");
-        const chefAssignments = { [chef1]: 0, [chef2]: 0, [chef3]: 0 };
-        const unassignedSteps = [...steps]; // Array of unassigned steps
-
-        // Step 1: Ensure each chef gets at least one task
-        chefs.forEach((chef) => {
-          if (unassignedSteps.length > 0) {
-            const randomIndex = Math.floor(
-              Math.random() * unassignedSteps.length
-            );
-            const randomStep = unassignedSteps[randomIndex];
-            const radios = randomStep.querySelectorAll('input[type="radio"]');
-
-            radios.forEach((radio) => {
-              if (radio.nextElementSibling.textContent === chef) {
-                radio.checked = true;
-                chefAssignments[chef]++;
-              }
-            });
-
-            // Remove this step from unassigned steps
-            unassignedSteps.splice(randomIndex, 1);
-          }
-        });
-
-        // Step 2: Assign remaining tasks randomly to chefs, keeping the distribution even
-        unassignedSteps.forEach((step) => {
-          const leastAssignedChefs = Object.keys(chefAssignments).filter(
-            (chef) =>
-              chefAssignments[chef] < Math.ceil(steps.length / chefs.length)
-          );
-
-          const randomChef =
-            leastAssignedChefs[
-              Math.floor(Math.random() * leastAssignedChefs.length)
-            ];
-          const radios = step.querySelectorAll('input[type="radio"]');
-
+        people.forEach((person, index) => {
+          let step = shuffledSteps[index];
+          let radios = step.querySelectorAll('input[type="radio"]');
           radios.forEach((radio) => {
-            if (radio.nextElementSibling.textContent === randomChef) {
+            if (radio.nextElementSibling.textContent === person) {
               radio.checked = true;
-              chefAssignments[randomChef]++;
             }
           });
+        });
+
+        shuffledSteps.slice(people.length).forEach((step) => {
+          let radios = step.querySelectorAll('input[type="radio"]');
+          let randomPersonIndex = Math.floor(Math.random() * radios.length);
+          radios[randomPersonIndex].checked = true;
         });
       }
 
       // Call this function on page load to assign initial tasks
-      window.onload = function () {
-        updateChefNamesInSteps(); // Update the chef names dynamically from localStorage
-        assignTasksWithAtLeastOnePerChef(); // Ensure each chef gets at least one task on page load
-      };
+      window.onload = assignInitialTasks;
 
       // Add Step functionality
       document
@@ -480,47 +449,47 @@
         .addEventListener("click", function () {
           let list = document.getElementById("sortable-list");
           let newCard = `
-  <li class="step-item list-group-item">
-    <div class="step-header d-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center">
-        <i class="bi bi-list handle-icon"></i>
-        <div class="step-info">
-          <p class="step-number">STEP ${stepCounter}</p>
-          <input type="text" class="form-control step-title-input" placeholder="Step Title" />
-        </div>
-      </div>
-      <div class="d-flex align-items-center">
-        <div class="step-timer">
-          <button class="timer-btn">-</button>
-          <span>5 mins.</span>
-          <button class="timer-btn">+</button>
-        </div>
-        <i class="bi bi-trash text-muted delete-step ml-2"></i>
-      </div>
-    </div>
-    <hr class="step-divider" />
-    <div class="step-body">
-      <div class="d-flex align-items-center">
-        <i class="bi bi-person task-icon"></i>
-        <p class="assigned-text mb-0">Assigned to</p>
-      </div>
-      <div class="assigned-users mt-2">
-        <label class="user-option">
-          <input type="radio" name="assigned-user-${stepCounter}" />
-          <span>${chef1}</span>
-        </label>
-        <label class="user-option">
-          <input type="radio" name="assigned-user-${stepCounter}" />
-          <span>${chef2}</span>
-        </label>
-        <label class="user-option">
-          <input type="radio" name="assigned-user-${stepCounter}" />
-          <span>${chef3}</span>
-        </label>
-      </div>
-    </div>
-  </li>
-  `;
+          <li class="step-item list-group-item">
+            <div class="step-header d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-list handle-icon"></i>
+                <div class="step-info">
+                  <p class="step-number">STEP ${stepCounter}</p>
+                  <input type="text" class="form-control step-title-input" placeholder="Step Title" />
+                </div>
+              </div>
+              <div class="d-flex align-items-center">
+                <div class="step-timer">
+                  <button class="timer-btn">-</button>
+                  <span>5 mins.</span>
+                  <button class="timer-btn">+</button>
+                </div>
+                <i class="bi bi-trash text-muted delete-step ml-2"></i>
+              </div>
+            </div>
+            <hr class="step-divider" />
+            <div class="step-body">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-person task-icon"></i>
+                <p class="assigned-text mb-0">Assigned to</p>
+              </div>
+              <div class="assigned-users mt-2">
+                <label class="user-option">
+                  <input type="radio" name="assigned-user-${stepCounter}" checked />
+                  <span>Jennifer Lopez</span>
+                </label>
+                <label class="user-option">
+                  <input type="radio" name="assigned-user-${stepCounter}" />
+                  <span>Jeff Bezos</span>
+                </label>
+                <label class="user-option">
+                  <input type="radio" name="assigned-user-${stepCounter}" />
+                  <span>Elon Musk</span>
+                </label>
+              </div>
+            </div>
+          </li>
+        `;
           list.insertAdjacentHTML("beforeend", newCard);
           stepCounter++;
           addDeleteListeners();
@@ -547,7 +516,7 @@
       document
         .querySelector(".assign-random")
         .addEventListener("click", function () {
-          assignTasksWithAtLeastOnePerChef();
+          assignInitialTasks();
         });
 
       // Timer functionality (+/-)
@@ -584,9 +553,18 @@
           stepCounter = 4; // Reset counter
           addDeleteListeners();
           updateStepNumbers();
-          assignTasksWithAtLeastOnePerChef(); // Reassign random tasks after refresh
-          updateChefNamesInSteps(); // Reset chef names
+          assignInitialTasks(); // Reassign random tasks after refresh
         });
+
+      // Retrieve the names from localStorage
+      const chef1 = localStorage.getItem("chef1");
+      const chef2 = localStorage.getItem("chef2");
+      const chef3 = localStorage.getItem("chef3");
+
+      // Display the names on the cooking page
+      document.getElementById("chef1-display").textContent = chef1;
+      document.getElementById("chef2-display").textContent = chef2;
+      document.getElementById("chef3-display").textContent = chef3;
     </script>
   </body>
 </html>

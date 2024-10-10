@@ -379,46 +379,65 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
     <script>
-      let stepCounter = 4; // Step count starts at 4 since 3 steps are already hardcoded
-      let originalOrderHTML = [];
+            let stepCounter = 4; // Step count starts at 4 since 3 steps are already hardcoded
+            let originalOrderHTML = [];
 
-      // Retrieve chef names from localStorage
-      const chef1 = localStorage.getItem("chef1") || "Jennifer Lopez";
-      const chef2 = localStorage.getItem("chef2") || "Jeff Bezos";
-      const chef3 = localStorage.getItem("chef3") || "Elon Musk";
+            // Retrieve chef names from localStorage
+            const chef1 = localStorage.getItem("chef1") || "Jennifer Lopez";
+            const chef2 = localStorage.getItem("chef2") || "Jeff Bezos";
+            const chef3 = localStorage.getItem("chef3") || "Elon Musk";
 
-      // Store the original steps for the refresh button
-      document.querySelectorAll(".step-item").forEach((item) => {
-        originalOrderHTML.push(item.outerHTML);
-      });
+            // Store the original steps for the refresh button
+            document.querySelectorAll(".step-item").forEach((item) => {
+              originalOrderHTML.push(item.outerHTML);
+            });
 
-      // Initialize SortableJS
-      let sortable = new Sortable(document.getElementById("sortable-list"), {
-        handle: ".handle-icon",
-        animation: 150,
-        onEnd: function () {
-          updateStepNumbers();
-        },
-      });
+            // Initialize SortableJS
+            let sortable = new Sortable(document.getElementById("sortable-list"), {
+              handle: ".handle-icon",
+              animation: 150,
+              onEnd: function () {
+                updateStepNumbers();
+              },
+            });
 
-      // Update step numbers
-      function updateStepNumbers() {
-        document.querySelectorAll(".step-item").forEach((item, index) => {
-          item.querySelector(".step-number").textContent = `STEP ${index + 1}`;
-        });
-      }
+            // Update step numbers
+            function updateStepNumbers() {
+              document.querySelectorAll(".step-item").forEach((item, index) => {
+                item.querySelector(".step-number").textContent = `STEP ${index + 1}`;
+              });
+            }
 
-      // Dynamically update the chef names in the tasks
-      function updateChefNamesInSteps() {
-        document.querySelectorAll(".step-item").forEach((item) => {
-          let chefLabels = item.querySelectorAll(".assigned-users span");
-          chefLabels[0].textContent = chef1;
-          chefLabels[1].textContent = chef2;
-          chefLabels[2].textContent = chef3;
-        });
-      }
+            // Dynamically update the chef names in the tasks
+            function updateChefNamesInSteps() {
+              document.querySelectorAll(".step-item").forEach((item) => {
+                let chefLabels = item.querySelectorAll(".assigned-users span");
+                chefLabels[0].textContent = chef1;
+                chefLabels[1].textContent = chef2;
+                chefLabels[2].textContent = chef3;
+              });
+            }
 
-      // Ensure each chef gets at least one task and distribute the rest randomly
+            // Ensure each chef gets at least one task
+            function assignTasksWithAtLeastOnePerChef() {
+              const chefs = [chef1, chef2, chef3];
+              const steps = document.querySelectorAll(".step-item");
+              const chefAssignments = { [chef1]: 0, [chef2]: 0, [chef3]: 0 };
+
+              // Step 1: Ensure each chef gets one task
+              chefs.forEach((chef, i) => {
+                if (steps[i]) {
+                  const radios = steps[i].querySelectorAll('input[type="radio"]');
+                  radios.forEach((radio) => {
+                    if (radio.nextElementSibling.textContent === chef) {
+                      radio.checked = true;
+                      chefAssignments[chef]++;
+                    }
+                  });
+                }
+              });
+
+              // Ensure each chef gets at least one task and distribute the rest randomly
       function assignTasksWithAtLeastOnePerChef() {
         const chefs = [chef1, chef2, chef3];
         const steps = document.querySelectorAll(".step-item");
@@ -428,9 +447,7 @@
         // Step 1: Ensure each chef gets at least one task
         chefs.forEach((chef) => {
           if (unassignedSteps.length > 0) {
-            const randomIndex = Math.floor(
-              Math.random() * unassignedSteps.length
-            );
+            const randomIndex = Math.floor(Math.random() * unassignedSteps.length);
             const randomStep = unassignedSteps[randomIndex];
             const radios = randomStep.querySelectorAll('input[type="radio"]');
 
@@ -454,9 +471,7 @@
           );
 
           const randomChef =
-            leastAssignedChefs[
-              Math.floor(Math.random() * leastAssignedChefs.length)
-            ];
+            leastAssignedChefs[Math.floor(Math.random() * leastAssignedChefs.length)];
           const radios = step.querySelectorAll('input[type="radio"]');
 
           radios.forEach((radio) => {
@@ -468,125 +483,126 @@
         });
       }
 
-      // Call this function on page load to assign initial tasks
-      window.onload = function () {
-        updateChefNamesInSteps(); // Update the chef names dynamically from localStorage
-        assignTasksWithAtLeastOnePerChef(); // Ensure each chef gets at least one task on page load
-      };
 
-      // Add Step functionality
-      document
-        .querySelector(".add-step")
-        .addEventListener("click", function () {
-          let list = document.getElementById("sortable-list");
-          let newCard = `
-  <li class="step-item list-group-item">
-    <div class="step-header d-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center">
-        <i class="bi bi-list handle-icon"></i>
-        <div class="step-info">
-          <p class="step-number">STEP ${stepCounter}</p>
-          <input type="text" class="form-control step-title-input" placeholder="Step Title" />
-        </div>
-      </div>
-      <div class="d-flex align-items-center">
-        <div class="step-timer">
-          <button class="timer-btn">-</button>
-          <span>5 mins.</span>
-          <button class="timer-btn">+</button>
-        </div>
-        <i class="bi bi-trash text-muted delete-step ml-2"></i>
-      </div>
-    </div>
-    <hr class="step-divider" />
-    <div class="step-body">
-      <div class="d-flex align-items-center">
-        <i class="bi bi-person task-icon"></i>
-        <p class="assigned-text mb-0">Assigned to</p>
-      </div>
-      <div class="assigned-users mt-2">
-        <label class="user-option">
-          <input type="radio" name="assigned-user-${stepCounter}" />
-          <span>${chef1}</span>
-        </label>
-        <label class="user-option">
-          <input type="radio" name="assigned-user-${stepCounter}" />
-          <span>${chef2}</span>
-        </label>
-        <label class="user-option">
-          <input type="radio" name="assigned-user-${stepCounter}" />
-          <span>${chef3}</span>
-        </label>
-      </div>
-    </div>
-  </li>
-  `;
-          list.insertAdjacentHTML("beforeend", newCard);
-          stepCounter++;
-          addDeleteListeners();
-          updateStepNumbers();
-          handleTitleEnter();
-        });
+            // Call this function on page load to assign initial tasks
+            window.onload = function () {
+              updateChefNamesInSteps(); // Update the chef names dynamically from localStorage
+              assignTasksWithAtLeastOnePerChef(); // Ensure each chef gets at least one task on page load
+            };
 
-      // Function to handle when the user presses Enter to finalize step title
-      function handleTitleEnter() {
-        document.querySelectorAll(".step-title-input").forEach((input) => {
-          input.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-              event.preventDefault(); // Prevent default enter behavior
-              const title = document.createElement("h4");
-              title.className = "step-title";
-              title.textContent = this.value; // Get the value from the input
-              this.replaceWith(title); // Replace input with styled h4 element
+            // Add Step functionality
+            document
+              .querySelector(".add-step")
+              .addEventListener("click", function () {
+                let list = document.getElementById("sortable-list");
+                let newCard = `
+        <li class="step-item list-group-item">
+          <div class="step-header d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-list handle-icon"></i>
+              <div class="step-info">
+                <p class="step-number">STEP ${stepCounter}</p>
+                <input type="text" class="form-control step-title-input" placeholder="Step Title" />
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="step-timer">
+                <button class="timer-btn">-</button>
+                <span>5 mins.</span>
+                <button class="timer-btn">+</button>
+              </div>
+              <i class="bi bi-trash text-muted delete-step ml-2"></i>
+            </div>
+          </div>
+          <hr class="step-divider" />
+          <div class="step-body">
+            <div class="d-flex align-items-center">
+              <i class="bi bi-person task-icon"></i>
+              <p class="assigned-text mb-0">Assigned to</p>
+            </div>
+            <div class="assigned-users mt-2">
+              <label class="user-option">
+                <input type="radio" name="assigned-user-${stepCounter}" />
+                <span>${chef1}</span>
+              </label>
+              <label class="user-option">
+                <input type="radio" name="assigned-user-${stepCounter}" />
+                <span>${chef2}</span>
+              </label>
+              <label class="user-option">
+                <input type="radio" name="assigned-user-${stepCounter}" />
+                <span>${chef3}</span>
+              </label>
+            </div>
+          </div>
+        </li>
+        `;
+                list.insertAdjacentHTML("beforeend", newCard);
+                stepCounter++;
+                addDeleteListeners();
+                updateStepNumbers();
+                handleTitleEnter();
+              });
+
+            // Function to handle when the user presses Enter to finalize step title
+            function handleTitleEnter() {
+              document.querySelectorAll(".step-title-input").forEach((input) => {
+                input.addEventListener("keydown", function (event) {
+                  if (event.key === "Enter") {
+                    event.preventDefault(); // Prevent default enter behavior
+                    const title = document.createElement("h4");
+                    title.className = "step-title";
+                    title.textContent = this.value; // Get the value from the input
+                    this.replaceWith(title); // Replace input with styled h4 element
+                  }
+                });
+              });
             }
-          });
-        });
-      }
 
-      // Assign Random functionality ensuring each person gets at least one task
-      document
-        .querySelector(".assign-random")
-        .addEventListener("click", function () {
-          assignTasksWithAtLeastOnePerChef();
-        });
+            // Assign Random functionality ensuring each person gets at least one task
+            document
+              .querySelector(".assign-random")
+              .addEventListener("click", function () {
+                assignTasksWithAtLeastOnePerChef();
+              });
 
-      // Timer functionality (+/-)
-      document.addEventListener("click", function (event) {
-        if (event.target.classList.contains("timer-btn")) {
-          let timerSpan = event.target.parentNode.querySelector("span");
-          let currentTime = parseInt(timerSpan.textContent);
-          if (event.target.textContent === "+") {
-            timerSpan.textContent = `${currentTime + 1} mins.`;
-          } else if (event.target.textContent === "-" && currentTime > 1) {
-            timerSpan.textContent = `${currentTime - 1} mins.`;
-          }
-        }
-      });
+            // Timer functionality (+/-)
+            document.addEventListener("click", function (event) {
+              if (event.target.classList.contains("timer-btn")) {
+                let timerSpan = event.target.parentNode.querySelector("span");
+                let currentTime = parseInt(timerSpan.textContent);
+                if (event.target.textContent === "+") {
+                  timerSpan.textContent = `${currentTime + 1} mins.`;
+                } else if (event.target.textContent === "-" && currentTime > 1) {
+                  timerSpan.textContent = `${currentTime - 1} mins.`;
+                }
+              }
+            });
 
-      // Delete functionality
-      function addDeleteListeners() {
-        document.querySelectorAll(".delete-step").forEach((button) => {
-          button.addEventListener("click", function () {
-            this.closest(".step-item").remove();
-            updateStepNumbers();
-          });
-        });
-      }
+            // Delete functionality
+            function addDeleteListeners() {
+              document.querySelectorAll(".delete-step").forEach((button) => {
+                button.addEventListener("click", function () {
+                  this.closest(".step-item").remove();
+                  updateStepNumbers();
+                });
+              });
+            }
 
-      addDeleteListeners();
+            addDeleteListeners();
 
-      // Refresh functionality
-      document
-        .querySelector(".refresh-btn")
-        .addEventListener("click", function () {
-          document.getElementById("sortable-list").innerHTML =
-            originalOrderHTML.join("");
-          stepCounter = 4; // Reset counter
-          addDeleteListeners();
-          updateStepNumbers();
-          assignTasksWithAtLeastOnePerChef(); // Reassign random tasks after refresh
-          updateChefNamesInSteps(); // Reset chef names
-        });
+            // Refresh functionality
+            document
+              .querySelector(".refresh-btn")
+              .addEventListener("click", function () {
+                document.getElementById("sortable-list").innerHTML =
+                  originalOrderHTML.join("");
+                stepCounter = 4; // Reset counter
+                addDeleteListeners();
+                updateStepNumbers();
+                assignTasksWithAtLeastOnePerChef(); // Reassign random tasks after refresh
+                updateChefNamesInSteps(); // Reset chef names
+              });
     </script>
   </body>
 </html>

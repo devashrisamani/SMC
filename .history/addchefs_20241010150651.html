@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Add Chefs</title>
+    <style>
+      body {
+        font-family: "DM Sans", sans-serif;
+      }
+      .container {
+        margin-top: 50px;
+        max-width: 600px;
+      }
+      .header-title {
+        font-family: "Calistoga-Regular", Helvetica, sans-serif;
+        color: #a67b5c;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+      .form-control {
+        margin-bottom: 20px;
+      }
+      .proceed-btn {
+        background-color: #a67b5c;
+        color: white;
+        font-size: 16px;
+        padding: 10px 30px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+      }
+      .proceed-btn:hover {
+        background-color: #8c6649;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="header-title">Lets add the chefs</h1>
+      <form id="chef-form">
+        <label for="chef1">Chef 1 Name</label>
+        <input
+          type="text"
+          id="chef1"
+          class="form-control"
+          value="Jennifer Lopez"
+        />
+
+        <label for="chef2">Chef 2 Name</label>
+        <input type="text" id="chef2" class="form-control" value="Jeff Bezos" />
+
+        <label for="chef3">Chef 3 Name</label>
+        <input type="text" id="chef3" class="form-control" value="Elon Musk" />
+
+        <p>
+          Minimum 2 chefs and 3 chefs will be the maximum that can participate.
+        </p>
+
+        <button type="submit" class="proceed-btn">Proceed</button>
+      </form>
+    </div>
+
+    <script>
+      // Handle form submission
+      document
+        .getElementById("chef-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get the chef names from the input fields
+          const chef1 = document.getElementById("chef1").value;
+          const chef2 = document.getElementById("chef2").value;
+          const chef3 = document.getElementById("chef3").value;
+
+          // Save the names to localStorage
+          localStorage.setItem("chef1", chef1);
+          localStorage.setItem("chef2", chef2);
+          localStorage.setItem("chef3", chef3);
+
+          // Redirect to the assign page
+          window.location.href = "assign.html"; // Replace with actual page URL
+        });
+    </script>
+  </body>
+</html>

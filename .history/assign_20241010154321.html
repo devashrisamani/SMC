@@ -418,53 +418,46 @@
         });
       }
 
-      // Ensure each chef gets at least one task and distribute the rest randomly
+      // Ensure each chef gets at least one task
       function assignTasksWithAtLeastOnePerChef() {
         const chefs = [chef1, chef2, chef3];
         const steps = document.querySelectorAll(".step-item");
         const chefAssignments = { [chef1]: 0, [chef2]: 0, [chef3]: 0 };
-        const unassignedSteps = [...steps]; // Array of unassigned steps
 
-        // Step 1: Ensure each chef gets at least one task
-        chefs.forEach((chef) => {
-          if (unassignedSteps.length > 0) {
-            const randomIndex = Math.floor(
-              Math.random() * unassignedSteps.length
-            );
-            const randomStep = unassignedSteps[randomIndex];
-            const radios = randomStep.querySelectorAll('input[type="radio"]');
-
+        // Step 1: Ensure each chef gets one task
+        chefs.forEach((chef, i) => {
+          if (steps[i]) {
+            const radios = steps[i].querySelectorAll('input[type="radio"]');
             radios.forEach((radio) => {
               if (radio.nextElementSibling.textContent === chef) {
                 radio.checked = true;
                 chefAssignments[chef]++;
               }
             });
-
-            // Remove this step from unassigned steps
-            unassignedSteps.splice(randomIndex, 1);
           }
         });
 
-        // Step 2: Assign remaining tasks randomly to chefs, keeping the distribution even
-        unassignedSteps.forEach((step) => {
-          const leastAssignedChefs = Object.keys(chefAssignments).filter(
-            (chef) =>
-              chefAssignments[chef] < Math.ceil(steps.length / chefs.length)
-          );
+        // Step 2: Assign remaining tasks randomly, while keeping balance
+        steps.forEach((step, i) => {
+          if (i >= chefs.length) {
+            // Start randomizing after each chef has one task
+            const radios = step.querySelectorAll('input[type="radio"]');
+            const leastAssignedChefs = Object.keys(chefAssignments).filter(
+              (chef) =>
+                chefAssignments[chef] < Math.ceil(steps.length / chefs.length)
+            );
 
-          const randomChef =
-            leastAssignedChefs[
-              Math.floor(Math.random() * leastAssignedChefs.length)
-            ];
-          const radios = step.querySelectorAll('input[type="radio"]');
-
-          radios.forEach((radio) => {
-            if (radio.nextElementSibling.textContent === randomChef) {
-              radio.checked = true;
-              chefAssignments[randomChef]++;
-            }
-          });
+            const randomChef =
+              leastAssignedChefs[
+                Math.floor(Math.random() * leastAssignedChefs.length)
+              ];
+            radios.forEach((radio) => {
+              if (radio.nextElementSibling.textContent === randomChef) {
+                radio.checked = true;
+                chefAssignments[randomChef]++;
+              }
+            });
+          }
         });
       }
 

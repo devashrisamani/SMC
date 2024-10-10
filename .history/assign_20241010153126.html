@@ -259,6 +259,20 @@
                   <i class="bi bi-person task-icon"></i>
                   <p class="assigned-text mb-0">Assigned to</p>
                 </div>
+                <!-- <div class="assigned-users mt-2">
+                  <label class="user-option">
+                    <input type="radio" name="assigned-user-1" />
+                    <span>Jennifer Lopez</span>
+                  </label>
+                  <label class="user-option">
+                    <input type="radio" name="assigned-user-1" />
+                    <span>Jeff Bezos</span>
+                  </label>
+                  <label class="user-option">
+                    <input type="radio" name="assigned-user-1" />
+                    <span>Elon Musk</span>
+                  </label>
+                </div> -->
                 <div class="assigned-users mt-2">
                   <label class="user-option">
                     <input type="radio" name="assigned-user-1" />
@@ -304,15 +318,15 @@
                 </div>
                 <div class="assigned-users mt-2">
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-2" />
+                    <input type="radio" name="assigned-user-1" />
                     <span id="chef1-display">Chef 1</span>
                   </label>
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-2" />
+                    <input type="radio" name="assigned-user-1" />
                     <span id="chef2-display">Chef 2</span>
                   </label>
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-2" />
+                    <input type="radio" name="assigned-user-1" />
                     <span id="chef3-display">Chef 3</span>
                   </label>
                 </div>
@@ -347,15 +361,15 @@
                 </div>
                 <div class="assigned-users mt-2">
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-3" />
+                    <input type="radio" name="assigned-user-1" />
                     <span id="chef1-display">Chef 1</span>
                   </label>
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-3" />
+                    <input type="radio" name="assigned-user-1" />
                     <span id="chef2-display">Chef 2</span>
                   </label>
                   <label class="user-option">
-                    <input type="radio" name="assigned-user-3" />
+                    <input type="radio" name="assigned-user-1" />
                     <span id="chef3-display">Chef 3</span>
                   </label>
                 </div>
@@ -418,53 +432,46 @@
         });
       }
 
-      // Ensure each chef gets at least one task and distribute the rest randomly
+      // Ensure each chef gets at least one task
       function assignTasksWithAtLeastOnePerChef() {
         const chefs = [chef1, chef2, chef3];
         const steps = document.querySelectorAll(".step-item");
-        const chefAssignments = { [chef1]: 0, [chef2]: 0, [chef3]: 0 };
-        const unassignedSteps = [...steps]; // Array of unassigned steps
+        const chefAssignments = {}; // Track how many tasks each chef has
 
-        // Step 1: Ensure each chef gets at least one task
-        chefs.forEach((chef) => {
-          if (unassignedSteps.length > 0) {
-            const randomIndex = Math.floor(
-              Math.random() * unassignedSteps.length
-            );
-            const randomStep = unassignedSteps[randomIndex];
-            const radios = randomStep.querySelectorAll('input[type="radio"]');
+        // Initialize counters for each chef
+        chefs.forEach((chef) => (chefAssignments[chef] = 0));
 
-            radios.forEach((radio) => {
-              if (radio.nextElementSibling.textContent === chef) {
-                radio.checked = true;
-                chefAssignments[chef]++;
-              }
-            });
-
-            // Remove this step from unassigned steps
-            unassignedSteps.splice(randomIndex, 1);
-          }
-        });
-
-        // Step 2: Assign remaining tasks randomly to chefs, keeping the distribution even
-        unassignedSteps.forEach((step) => {
-          const leastAssignedChefs = Object.keys(chefAssignments).filter(
-            (chef) =>
-              chefAssignments[chef] < Math.ceil(steps.length / chefs.length)
-          );
-
-          const randomChef =
-            leastAssignedChefs[
-              Math.floor(Math.random() * leastAssignedChefs.length)
-            ];
-          const radios = step.querySelectorAll('input[type="radio"]');
-
+        // Ensure each chef gets at least one task
+        chefs.forEach((chef, index) => {
+          let step = steps[index]; // Assign one chef per step initially
+          let radios = step.querySelectorAll('input[type="radio"]');
           radios.forEach((radio) => {
-            if (radio.nextElementSibling.textContent === randomChef) {
+            if (radio.nextElementSibling.textContent === chef) {
               radio.checked = true;
-              chefAssignments[randomChef]++;
+              chefAssignments[chef]++;
             }
           });
+        });
+
+        // Randomly assign the remaining steps
+        steps.forEach((step, index) => {
+          if (index >= chefs.length) {
+            // Only randomize after each chef has a task
+            const radios = step.querySelectorAll('input[type="radio"]');
+            const availableChefs = chefs.filter(
+              (chef) => chefAssignments[chef] < steps.length / chefs.length
+            );
+
+            // Randomly select a chef from available ones
+            const randomChef =
+              availableChefs[Math.floor(Math.random() * availableChefs.length)];
+            radios.forEach((radio) => {
+              if (radio.nextElementSibling.textContent === randomChef) {
+                radio.checked = true;
+                chefAssignments[randomChef]++;
+              }
+            });
+          }
         });
       }
 
