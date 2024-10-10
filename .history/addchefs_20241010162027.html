@@ -22,22 +22,19 @@
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         padding: 30px;
         margin-top: -20px;
-        min-height: calc(
-          100vh - 130px
-        ); /* Adjusted for better height calculation */
+        min-height: calc(100vh - 130px);
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Center the form and image */
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
       }
 
       /* Header title styles */
       .header-title {
+        font-family: "Calistoga", cursive;
         color: #a67b5c;
         font-size: 36px;
-        text-align: left;
-        width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
       }
 
       /* Form container styles */
@@ -48,7 +45,6 @@
         gap: 50px;
         width: 100%;
         max-width: 900px;
-        margin-top: 30px;
       }
 
       .form-control {
@@ -61,18 +57,18 @@
 
       .image-column {
         flex: 1;
-        background-color: #f9f4ef;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 300px;
-        border-radius: 10px;
-        border: 2px dashed #a67b5c;
       }
 
       .image-placeholder {
-        color: #a67b5c;
-        font-size: 24px;
+        width: 200px;
+        height: 200px;
+        background-image: url("img/utensils-placeholder.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
       }
 
       /* Proceed button styles */
@@ -84,6 +80,7 @@
         border-radius: 20px;
         border: none;
         cursor: pointer;
+        margin-top: 40px;
       }
 
       .proceed-btn:hover {
@@ -92,11 +89,16 @@
 
       /* Bottom border line */
       .bottom-line {
-        margin-top: 10px;
         font-size: 14px;
-        text-align: left;
         color: #a67b5c;
-        padding-left: 30px; /* Ensure it lines up nicely with the form */
+        margin-top: 50px;
+      }
+
+      /* Responsive styling */
+      @media (max-width: 768px) {
+        .form-container {
+          flex-direction: column;
+        }
       }
     </style>
   </head>
@@ -118,7 +120,7 @@
 
     <!-- Main Content with rounded top edges -->
     <section class="container-fluid rounded-container">
-      <h1 class="header-title mb-4 text-start">Let's add the chefs</h1>
+      <h1 class="header-title">Let's add the chefs</h1>
 
       <div class="form-container">
         <!-- Form section -->
@@ -154,15 +156,15 @@
 
         <!-- Image placeholder section -->
         <div class="image-column">
-          <div class="image-placeholder">Image Placeholder</div>
+          <div class="image-placeholder"></div>
         </div>
       </div>
-    </section>
 
-    <!-- Bottom line as shown in the image, now outside the rounded container and left-aligned -->
-    <div class="bottom-line">
-      Minimum 2, and maximum 3 chefs will be able participate
-    </div>
+      <!-- Bottom line as shown in the image -->
+      <div class="bottom-line">
+        Minimum 2 chefs and 3 chefs will be the maximum that can participate.
+      </div>
+    </section>
 
     <script>
       // Handle form submission
