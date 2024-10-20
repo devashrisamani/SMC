@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Add Chefs</title>
+    <style>
+      /* Header background color */
+      header {
+        background-color: #a27b5c;
+        height: 100px;
+        overflow: hidden;
+      }
+
+      /* Custom rounded container styling */
+      .rounded-container {
+        background-color: #fff;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: -20px;
+        min-height: calc(100vh - 130px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Header title styles */
+      .header-title {
+        color: #a67b5c;
+        font-size: 36px;
+        text-align: left;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      /* Form container styles */
+      .form-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 50px;
+        width: 100%;
+        max-width: 900px;
+        margin-top: 30px;
+      }
+
+      .form-control {
+        margin-bottom: 20px;
+      }
+
+      .form-column {
+        flex: 1;
+      }
+
+      .image-column {
+        flex: 1;
+        background-color: #f9f4ef;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 300px;
+        border-radius: 10px;
+        overflow: hidden; /* Ensures image doesn't overflow */
+        padding: 20px; /* Optional padding around the image */
+      }
+
+      .image-column img {
+        max-width: 100%; /* Make the image responsive */
+        max-height: 100%; /* Prevents overflow of image */
+        object-fit: cover; /* Ensures the image scales nicely */
+      }
+
+      .logo {
+        max-height: 40px; /* Adjust the height of the logo to fit in the header */
+        width: auto; /* Ensure the width scales proportionally */
+        object-fit: contain; /* Ensure the image doesn't get cut off */
+        margin-left: 10px; /* Add some padding if needed to align it properly */
+      }
+
+      /* Proceed button styles */
+      .proceed-btn {
+        background-color: #a67b5c;
+        color: white;
+        font-size: 16px;
+        padding: 10px 30px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .proceed-btn:hover {
+        background-color: #8c6649;
+      }
+
+      /* Bottom border line */
+      .bottom-line {
+        margin-top: 10px;
+        font-size: 14px;
+        text-align: left;
+        color: #a67b5c;
+        padding-left: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="container-fluid border-bottom py-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Logo -->
+        <div>
+          <img
+            src="images/Logo White Colour - 100 px.png"
+            alt="Logo"
+            class="logo"
+          />
+        </div>
+
+        <!-- Help Icon -->
+        <div>
+          <i class="bi bi-question-circle-fill fs-4 text-muted"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content with rounded top edges -->
+    <section class="container-fluid rounded-container">
+      <h1 class="header-title mb-4 text-start">Let's add the chefs!</h1>
+
+      <div class="form-container">
+        <!-- Form section -->
+        <div class="form-column">
+          <form id="chef-form">
+            <label for="chef1">Chef 1 Name</label>
+            <input
+              type="text"
+              id="chef1"
+              class="form-control"
+              value="Jennifer Lopez"
+            />
+
+            <label for="chef2">Chef 2 Name</label>
+            <input
+              type="text"
+              id="chef2"
+              class="form-control"
+              value="Jeff Bezos"
+            />
+
+            <label for="chef3">Chef 3 Name</label>
+            <input
+              type="text"
+              id="chef3"
+              class="form-control"
+              value="Elon Musk"
+            />
+
+            <button type="submit" class="proceed-btn">Proceed</button>
+          </form>
+        </div>
+
+        <!-- Image section -->
+        <div class="image-column">
+          <img
+            src="images/Adding Chefs PNGs.png"
+            alt="Cooking Graphics"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom line as shown in the image, now outside the rounded container and left-aligned -->
+    <div class="bottom-line">
+      Minimum 2, and maximum 3 chefs will be able participate
+    </div>
+
+    <script>
+      // Handle form submission
+      document
+        .getElementById("chef-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get the chef names from the input fields
+          const chef1 = document.getElementById("chef1").value;
+          const chef2 = document.getElementById("chef2").value;
+          const chef3 = document.getElementById("chef3").value;
+
+          // Save the names to localStorage
+          localStorage.setItem("chef1", chef1);
+          localStorage.setItem("chef2", chef2);
+          localStorage.setItem("chef3", chef3);
+
+          // Redirect to the assign page
+          window.location.href = "url.html";
+        });
+    </script>
+  </body>
+</html>
